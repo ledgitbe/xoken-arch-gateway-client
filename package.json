@@ -1,0 +1,106 @@
+{
+  "name": "xoken-arch-gateway-client",
+  "version": "1.0.0",
+  "description": "Javascipt SDK for talking to Xoken Arch Gateway",
+  "main": "build/main/index.js",
+  "typings": "build/main/index.d.ts",
+  "module": "build/module/index.js",
+  "repository": "https://gitlab.com/ledgit/arch-xoken-client",
+  "license": "MIT",
+  "keywords": [
+    "xoken",
+    "bitcoin",
+    "arch",
+    "gateway",
+    "bsv",
+    "spv"
+  ],
+  "scripts": {
+    "describe": "npm-scripts-info",
+    "build": "run-s clean && run-p build:*",
+    "build:main": "tsc -p tsconfig.json",
+    "build:module": "tsc -p tsconfig.module.json",
+    "fix": "run-s fix:*",
+    "fix:pretty": "prettier \"src/**/*.ts\" --write",
+    "fix:lint": "eslint ./src/ --ext .ts --fix",
+    "test": "run-s test:lint test:pretty test:spec",
+    "test:spec": "TS_NODE_FILES=true NODE_ENV=test mocha --exit -r ts-node/register src/test/*.spec.ts",
+    "test:lint": "eslint ./src/ --ext .ts",
+    "test:pretty": "prettier \"src/**/*.ts\" --list-different",
+    "watch": "run-s clean build:main && run-p \"build:main -- -w\" \"test:unit -- --watch\"",
+    "cov": "run-s build test:spec cov:html && open-cli coverage/index.html",
+    "cov:html": "nyc report --reporter=html",
+    "cov:send": "nyc report --reporter=lcov && codecov",
+    "cov:check": "nyc report && nyc check-coverage --lines 100 --functions 100 --branches 100",
+    "doc": "run-s doc:html && open-cli build/docs/index.html",
+    "doc:html": "typedoc src/ --exclude **/*.spec.ts --target ES6 --mode file --out build/docs",
+    "doc:json": "typedoc src/ --exclude **/*.spec.ts --target ES6 --mode file --json build/docs/typedoc.json",
+    "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d build/docs",
+    "reset": "git clean -dfx && git reset --hard && npm i",
+    "clean": "trash build test"
+  },
+  "scripts-info": {
+    "info": "Display information about the package scripts",
+    "build": "Clean and rebuild the project",
+    "fix": "Try to automatically fix any linting problems",
+    "test": "Lint and unit test the project",
+    "watch": "Watch and rebuild the project on save, then rerun relevant tests",
+    "cov": "Rebuild, run tests, then create and open the coverage report",
+    "doc": "Generate HTML API documentation and open it in a browser",
+    "doc:json": "Generate API documentation in typedoc JSON format",
+    "version": "Bump package.json version, update CHANGELOG.md, tag release",
+    "reset": "Delete all untracked files and reset the repo to the last commit"
+  },
+  "engines": {
+    "node": ">=8.9"
+  },
+  "dependencies": {
+    "cbor": "^5.0.1",
+    "frame-stream": "^2.0.0",
+    "ts-node": "^8.6.2"
+  },
+  "devDependencies": {
+    "@bitjson/npm-scripts-info": "^1.0.0",
+    "@bitjson/typedoc": "^0.15.0-0",
+    "@istanbuljs/nyc-config-typescript": "^0.1.3",
+    "@types/cbor": "^5.0.0",
+    "@types/chai": "^4.2.9",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^10",
+    "@typescript-eslint/eslint-plugin": "^2.7.0",
+    "@typescript-eslint/parser": "^2.7.0",
+    "chai": "^4.2.0",
+    "codecov": "^3.5.0",
+    "cz-conventional-changelog": "^2.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^4.2.3",
+    "md5-file": "^4.0.0",
+    "mocha": "^7.0.1",
+    "npm-run-all": "^4.1.5",
+    "nyc": "^14.1.1",
+    "open-cli": "^5.0.0",
+    "prettier": "^1.18.2",
+    "standard-version": "^6.0.1",
+    "trash-cli": "^3.0.0",
+    "tslint": "^5.18.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-immutable": "^6.0.1",
+    "typescript": "^3.5.3"
+  },
+  "prettier": {
+    "singleQuote": true
+  },
+  "nyc": {
+    "extends": "@istanbuljs/nyc-config-typescript",
+    "exclude": [
+      "**/*.spec.js"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run fix; npm test"
+    }
+  }
+}

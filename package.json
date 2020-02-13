@@ -56,10 +56,10 @@
   },
   "dependencies": {
     "cbor": "^5.0.1",
-    "frame-stream": "^2.0.0",
-    "ts-node": "^8.6.2"
+    "frame-stream": "^2.0.0"
   },
   "devDependencies": {
+    "ts-node": "^8.6.2",
     "@bitjson/npm-scripts-info": "^1.0.0",
     "@bitjson/typedoc": "^0.15.0-0",
     "@istanbuljs/nyc-config-typescript": "^0.1.3",

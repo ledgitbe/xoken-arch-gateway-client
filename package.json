@@ -1,5 +1,6 @@
 {
   "name": "xoken-arch-gateway-client",
+  "author": "Sven De Waerhert",
   "version": "1.0.2",
   "description": "Javascipt SDK for talking to Xoken Arch Gateway",
   "main": "build/main/index.js",

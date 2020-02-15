@@ -17,16 +17,15 @@ export class Client {
   }
 
   async call(func: string, i: number, args: any): Promise<any> {
-    const msg = cbor.encode([0, 1, func, [[i, args]]]);
-    this.outbound.write(msg);
-
     return new Promise(resolve => {
+      const msg = cbor.encode([0, 1, func, [[i, args]]]);
       const handler = (msg: Buffer) => {
         const decoded = cbor.decode(msg);
         this.inbound.off('data', handler);
         resolve(decoded);
       };
       this.inbound.on('data', handler);
+      this.outbound.write(msg);
     });
   }
 

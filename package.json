@@ -2,6 +2,9 @@
   "name": "xoken-arch-gateway-client",
   "author": "Sven De Waerhert",
   "version": "1.0.3",
+  "bin": {
+    "xoken-arch-gateway-client": "./bin/xoken-arch-gateway-client"
+  },
   "description": "Javascipt SDK for talking to Xoken Arch Gateway",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
@@ -57,6 +60,7 @@
   },
   "dependencies": {
     "cbor": "^5.0.1",
+    "commander": "^4.1.1",
     "frame-stream": "^2.0.0"
   },
   "devDependencies": {

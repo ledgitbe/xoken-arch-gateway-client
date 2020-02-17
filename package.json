@@ -1,7 +1,7 @@
 {
   "name": "xoken-arch-gateway-client",
   "author": "Sven De Waerhert",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "bin": {
     "xoken-arch-gateway-client": "./bin/xoken-arch-gateway-client"
   },

@@ -28,14 +28,14 @@
     "fix:pretty": "prettier \"src/**/*.ts\" --write",
     "fix:lint": "eslint ./src/ --ext .ts --fix",
     "test": "run-s test:lint test:pretty test:spec",
-    "test:spec": "TS_NODE_FILES=true NODE_ENV=test mocha --exit -r ts-node/register src/test/*.spec.ts",
+    "test:spec": "TS_NODE_FILES=true NODE_ENV=test nyc mocha --exit -r ts-node/register src/test/*.spec.ts",
     "test:lint": "eslint ./src/ --ext .ts",
     "test:pretty": "prettier \"src/**/*.ts\" --list-different",
     "watch": "run-s clean build:main && run-p \"build:main -- -w\" \"test:unit -- --watch\"",
     "cov": "run-s build test:spec cov:html && open-cli coverage/index.html",
     "cov:html": "nyc report --reporter=html",
     "cov:send": "nyc report --reporter=lcov && codecov",
-    "cov:check": "nyc report && nyc check-coverage --lines 100 --functions 100 --branches 100",
+    "cov:check": "nyc report && nyc check-coverage --lines 95 --functions 95 --branches 95",
     "doc": "run-s doc:html && open-cli build/docs/index.html",
     "doc:html": "typedoc src/ --exclude **/*.spec.ts --target ES6 --mode file --out build/docs",
     "doc:json": "typedoc src/ --exclude **/*.spec.ts --target ES6 --mode file --json build/docs/typedoc.json",
@@ -103,7 +103,7 @@
   "nyc": {
     "extends": "@istanbuljs/nyc-config-typescript",
     "exclude": [
-      "**/*.spec.js"
+      "src/test"
     ]
   },
   "husky": {

@@ -1,0 +1,45 @@
+image: node:10.20.0-jessie
+
+include:
+  - template: Dependency-Scanning.gitlab-ci.yml
+  - template: Code-Quality.gitlab-ci.yml
+
+stages:
+  - npm
+  - test
+  - deploy
+
+npm:
+  stage: npm
+  script:
+    - npm install
+  cache:
+    paths:
+      - node_modules/
+  artifacts:
+    expire_in: 1 days
+    when: on_success
+    paths:
+      - node_modules/
+
+test:
+  stage: test
+  dependencies:
+    - npm
+  script:
+    - npm test
+  artifacts:
+    expire_in: 1 days
+    when: on_success
+    paths:
+      - .nyc_output/
+
+codecov:
+  stage: deploy
+  dependencies:
+    - npm
+    - test
+  script:
+    - npm run cov:send
+  only:
+    - master

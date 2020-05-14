@@ -17,7 +17,7 @@ export class Client {
   }
 
   async call(func: string, i: number, args: any): Promise<any> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const msg = cbor.encode([0, 1, func, [[i, args]]]);
       const handler = (msg: Buffer) => {
         const decoded = cbor.decode(msg);

@@ -19,13 +19,13 @@ describe('Wire formats', () => {
       s.pipe(inbound);
       outbound.pipe(s);
 
-      s.on('data', data => {
+      s.on('data', (data) => {
         clientData = data;
         outbound.write(Buffer.from('Received something, sending stuff back'));
       });
     });
 
-    server.on('error', err => {
+    server.on('error', (err) => {
       throw err;
     });
 

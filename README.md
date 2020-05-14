@@ -2,6 +2,12 @@ Xoken Arch Gateway client
 
 > Javascript SDK to talk to Xoken Arch Gateway
 
+[![Codecov branch](https://img.shields.io/codecov/c/gitlab/ledgit/xoken-arch-gateway-client/master)](https://codecov.io/gl/ledgit/xoken-arch-gateway-client)
+[![Gitlab pipeline status (branch)](https://img.shields.io/gitlab/pipeline/ledgit/xoken-arch-gateway-client/master)](https://gitlab.com/ledgit/xoken-arch-gateway-client/pipelines)
+[![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/xoken-arch-gateway-client)](https://libraries.io/npm/xoken-arch-gateway-client)
+[![npm](https://img.shields.io/npm/v/xoken-arch-gateway-client)](https://www.npmjs.com/package/xoken-arch-gateway-client)
+
+
 # Install
 
 ```
